@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
-
+const routes = require('./routes/routes');
 // Establish database connection
 connectDB();
 
@@ -27,4 +27,6 @@ app.listen(PORT, () => {
   console.log(`Server is up and running ${PORT}`);
 });
 
-//
+// Routes //
+
+app.use('/api', routes);
