@@ -1,4 +1,4 @@
-# Apollonia Dental Practice - Employee Management System
+# Dental Practice - Employee Management System
 
 An application to manage employees and departments of the Apollonia Dental Practice.
 
@@ -20,33 +20,31 @@ Apollonia Dental Practice aims to digitalize its employee management. The primar
 
 ## Structure:
 
-`Backend:`
+### Backend:
+
 -Node.js & Express.js for the server.
 -MongoDB for the database.
 -Models:
 -Employee: Contains Name, Surname, Department.
 -Department: Contains Department Name.
 
-``Frontend:`
+### Frontend:`
+
 -React for building the user interface.
 -CRUD operations through the frontend for both employees and departments.
 
-``Directories & Files:`
+### Directories & Files:`
+
 -server/: Contains all backend related files.
 -config/: Configuration files such as database connection.
 -models/: MongoDB database models.
 -routes/: Express routes to handle API endpoints.
 -index.js: Entry point for the server.
 
-``client/: Contains all frontend related files (React application).`
+### client/: Contains all frontend related files (React application).`
 
 -src/: Source files for React.
 -components/: Reusable React components.
 -pages/: React components representing entire pages/views.
 -App.js: Main React component.
 -... (other frontend directories and files)
-
-## Current Data:
-
--Employees (10): Lisa Harris, Alfred Christensen, John Dudley, Danny Perez, Sarah Alvarez, Constance Smith, Travis Combs, Francisco Willard, Janet Doe, Leslie Roche.
--Departments (5): General Dentistry, Pediatric Dentistry, Restorative Dentistry, Surgery, Orthodontics.
