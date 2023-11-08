@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import '../Styles/DepartmentList.css'; // Ensure you import the CSS file
 
-const DepartmentList = () => {
-  const [departments, setDepartment] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchDepartments = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:8000/api/departments'
-        );
-        setDepartment(response.data.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-    fetchDepartments();
-  }, []);
-
+const DepartmentList = ({ departments, loading }) => {
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+
+  const handleUpdate = (departmentId) => {
+    // Placeholder function - implement navigation or state update logic
+    console.log('Update Department ID:', departmentId);
+  };
+
+  const handleDelete = (departmentId) => {
+    // Placeholder function - implement delete logic
+    console.log('Delete Department ID:', departmentId);
+  };
 
   return (
-    <div>
+    <div className="department-list-container">
       <h2>Departments Dashboard</h2>
       <ul>
         {departments.map((department) => (
-          <li key={department._id}>{department.name}</li>
+          <li key={department._id}>
+            {department.name}
+            <div className="department-actions">
+              <button onClick={() => handleUpdate(department._id)}>
+                Update
+              </button>
+              <button onClick={() => handleDelete(department._id)}>
+                Delete
+              </button>
+            </div>
+          </li>
         ))}
       </ul>
     </div>

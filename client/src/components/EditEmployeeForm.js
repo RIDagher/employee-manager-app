@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../Styles/AddEditEmployeeForm.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddEditEmployeeForm = ({ departments }) => {
+const EditEmployeeForm = ({ departments }) => {
+  const { id } = useParams();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,6 +14,30 @@ const AddEditEmployeeForm = ({ departments }) => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      setLoading(true);
+
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/employees/${id}`
+        );
+        // Assuming the department is populated with the entire department object
+        setFormData({
+          firstName: response.data.data.firstName,
+          lastName: response.data.data.lastName,
+          email: response.data.data.email,
+          department: response.data.data.department._id,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.log('Failed to fetch employee', error);
+        setLoading(false);
+      }
+    };
+    fetchEmployee();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,22 +52,20 @@ const AddEditEmployeeForm = ({ departments }) => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:8000/api/employees', formData);
-      navigate('/employees'); // Redirect to employee list after successful add
+      await axios.put(`http://localhost:8000/api/employees/${id}`, formData);
+      navigate('/employees');
     } catch (error) {
-      console.error('There was an error saving the new employee', error);
-      // Handle errors (show to user, log, etc.)
+      console.log('Error updating employee', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     navigate('/employees');
   };
 
-  if (loading) return <p>Loading...</p>;
-
+  if (loading) return <div>Loading...</div>;
   return (
     <form onSubmit={handleSubmit}>
       <label>
@@ -52,7 +75,6 @@ const AddEditEmployeeForm = ({ departments }) => {
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
-          required
         />
       </label>
       <label>
@@ -81,21 +103,20 @@ const AddEditEmployeeForm = ({ departments }) => {
           name="department"
           value={formData.department}
           onChange={handleChange}
-          required
         >
-          {departments.map((dept) => (
-            <option key={dept._id} value={dept._id}>
-              {dept.name}
+          {departments.map((department) => (
+            <option key={department._id} value={department._id}>
+              {department.name}
             </option>
           ))}
         </select>
       </label>
       <button type="submit">Save</button>
-      <button type="button" onClick={handleCancle}>
+      <button type="button" onClick={handleCancel}>
         Cancel
       </button>
     </form>
   );
 };
 
-export default AddEditEmployeeForm;
+export default EditEmployeeForm;

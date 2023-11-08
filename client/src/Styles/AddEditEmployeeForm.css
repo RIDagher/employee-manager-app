@@ -1,0 +1,35 @@
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  background: var(--light-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input,
+form select,
+form button {
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+form button {
+  width: auto;
+  padding: 10px 30px;
+}
+
+form button[type='button'] {
+  background-color: var(--dark-color);
+}
+
+@media (max-width: 600px) {
+  form {
+    padding: 10px;
+  }
+}

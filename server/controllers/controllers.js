@@ -27,6 +27,23 @@ exports.getAllEmployees = async (req, res) => {
   }
 };
 
+exports.getSingleEmployee = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const employee = await Employee.findById(id).populate('department');
+
+    if (employee) {
+      sendResponse(res, 200, employee, 'Success');
+    } else {
+      sendResponse(res, 404, null, 'Employee not found!');
+    }
+  } catch (err) {
+    console.log('failed to fetch employee', err);
+    sendResponse(res, 500, err.message);
+  }
+};
+
 exports.createEmployee = async (req, res) => {
   try {
     const { firstName, lastName, department, email } = req.body;

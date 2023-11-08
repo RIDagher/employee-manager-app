@@ -1,0 +1,70 @@
+.employee-list-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--light-color);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.employee-list-container h2 {
+  margin: 0 0 20px 0;
+  color: var(--primary-color);
+}
+
+.employee-list-container ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.employee-list-container li {
+  background-color: var(--light-color);
+  border: 1px solid var(--dark-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.employee-list-container li button {
+  margin-left: 10px;
+}
+.employee-list-container .employee-details span {
+  display: inline-block; /* Allows margin to be applied properly */
+  margin-right: 10px; /* Adds space between email and department */
+}
+
+.employee-list-container .employee-details .employee-email {
+  font-style: italic;
+}
+
+.employee-list-container .employee-details .employee-department {
+  font-weight: bold;
+  background-color: var(--accent-color);
+  color: var(--light-color);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .employee-list-container .employee-details span {
+    display: block; /* Stack them on top of each other on small screens */
+    margin-right: 0;
+    margin-bottom: 5px; /* Adds space between email and department */
+  }
+}
+
+@media (max-width: 600px) {
+  .employee-list-container li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .employee-list-container li button {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
