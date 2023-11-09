@@ -48,23 +48,28 @@ const EmployeeList = () => {
   return (
     <div className="employee-list-container">
       <h2>Employees Dashboard</h2>
+      <div className="employee-list-header">
+        <span className="header-item">Name</span>
+        <span className="header-item">ID</span>
+        <span className="header-item">Email</span>
+        <span className="header-item">Address</span>
+        <span className="header-item">Department</span>
+        <span className="header-item">Actions</span>
+      </div>
       <ul>
         {employees.map((employee) => (
-          <li key={employee._id}>
-            <div className="employee-info">
-              {employee.firstName} {employee.lastName}
-            </div>
-            <div className="employee-details">
-              <span className="employee-email">{employee.email}</span>
-
-              <span className="employee-department">
-                {employee.department.name}
-              </span>
-            </div>
-            <div className="employee-actions">
+          <li key={employee._id} className="employee-item">
+            {}
+            <span>{`${employee.firstName} ${employee.lastName}`}</span>
+            <span>{employee._id}</span>
+            <span>{employee.email}</span>
+            <span>{employee.address}</span>
+            {/* we need to add the address later */}
+            <span>{employee.department.name}</span>
+            <span className="employee-actions">
               <button onClick={() => handleUpdate(employee._id)}>Update</button>
               <button onClick={() => handleDelete(employee._id)}>Delete</button>
-            </div>
+            </span>
           </li>
         ))}
       </ul>
